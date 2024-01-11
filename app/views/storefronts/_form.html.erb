@@ -1,43 +1,67 @@
 <%= simple_form_for storefront, data: { controller: 'nested-form', nested_form_index_value: 'NEW_RECORD' } do |form| %>
-  <% if storefront.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(storefront.errors.count, "error") %> prohibited this storefront from being saved:</h2>
-
-      <ul>
-        <% storefront.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <fieldset class="m-5 flex bg-white border border-gray-200 rounded-xl shadow">
+    <div class="w-2/5 m-4">
+      <legend class="font-bold text-xl">Return Reasons</legend>
+      Add or edit return reasons you would like to show the customers during the return request process.
     </div>
-  <% end %>
 
-  <div>
-    <div
-      class="return-reason-container"
-    >
-      <template hidden data-nested-form-target="template">
-        <%= form.simple_fields_for :reasons, Reason.new, child_index: 'NEW_RECORD' do |reason_fields| %>
-          <%= render 'reason', f: reason_fields %>
-        <% end %>
-      </template>
+    <div class="w-3/5 m-4">
+      <% if storefront.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(storefront.errors.count, "error") %> prohibited this storefront from being saved:</h2>
 
-      <button type="button" data-action="nested-form#addAssociation" class="btn">
-        <i class="add-icon"></i> Add Return Reason
-      </button>
-      <%= form.simple_fields_for :reasons, @storefront.reasons.ordered do |reason_fields| %>
-        <%= render 'reason', f: reason_fields %>
+          <ul>
+            <% storefront.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
 
-      <div hidden data-nested-form-target="addItem"></div>
-    </div>
-  </div>
+      <div>
+        <template hidden data-nested-form-target="template">
+          <%= form.simple_fields_for :reasons, Reason.new, child_index: 'NEW_RECORD' do |reason_fields| %>
+            <%= render 'reason', f: reason_fields %>
+          <% end %>
+        </template>
 
-  <div>
-    <div>
+        <div class="bg-gray-50 rounded-xl border border-gray-200">
+          <button type="button" data-action="nested-form#addAssociation" class="w-full p-3 flex text-blue-600">
+            <i class="fa-solid fa-circle-plus text-lg"></i>
+            <span class="ml-6 font-semibold">Add Return Reason</span>
+          </button>
+
+          <div>
+            <% @reasons.each do |reason| %>
+              <div class="border-t border-gray-200" data-id="<%= reason.id %>">
+                <div class="flex items-center">
+                  <i class="p-4 fa-solid fa-grip-vertical text-lg text-gray-300"></i>
+                  <% if reason.active %>
+                    <i class="py-4 px-3 fa-regular fa-eye text-lg text-blue-600"></i>
+                    <div class="grow">
+                      <%= reason.label %>
+                    </div>
+                  <% else %>
+                    <i class="py-4 px-3 fa-regular fa-eye-slash text-lg text-gray-400"></i>
+                    <div class="grow text-gray-400">
+                      <%= reason.label %>
+                    </div>
+                  <% end %>
+                  <button class="p-4 font-semibold text-blue-600" data-action="click->modal#show" data-modal-id="edit-reason-modal" data-id="<%= reason.id %>">Edit</button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </fieldset>
+
+  <div class="p-5 absolute bottom-0 w-[81%] flex items-center bg-white border-t border-gray-200">
+    <div class="grow">
       Remember to save your changes before leaving this page
     </div>
-    <div>
-      <%= form.submit 'Save', class: 'btn-primary' %>
-    </div>
+    <%= form.submit 'Save', class: 'btn rounded-md bg-amber-400' %>
   </div>
 <% end %>
