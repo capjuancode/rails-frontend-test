@@ -17,6 +17,7 @@ class StorefrontsController < ApplicationController
 
   # GET /storefronts/1/edit
   def edit
+    @reasons = @storefront.reasons
   end
 
   # POST /storefronts or /storefronts.json

@@ -4,5 +4,5 @@ class Reason < ApplicationRecord
   validates :code, presence: true, uniqueness: { scope: :storefront_id }
   validates :label, presence: true
 
-  scope :ordered, -> { order(ordering: :asc) }
+  default_scope { order(ordering: :asc) }
 end
