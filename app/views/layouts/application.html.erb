@@ -11,11 +11,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <sideBar class="fixed top-0 left-0 bg-gray-900 h-screen w-80"></sideBar>
-    <body class="mx-auto md:w-2/3 w-full mt-7 bg-gray-300">
+  <body class="flex bg-gray-100">
+    <div class="w-[24%] h-screen bg-neutral-800"></div>
+    <div class="w-full h-scren">
       <%= yield %>
-    </body>
-    <footer></footer>
+    </div>
   </body>
 </html>
