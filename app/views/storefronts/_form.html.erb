@@ -6,22 +6,12 @@
     </div>
 
     <div class="w-3/5 m-4">
-      <% if storefront.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(storefront.errors.count, "error") %> prohibited this storefront from being saved:</h2>
-
-          <ul>
-            <% storefront.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <%= render partial: 'layouts/shared/error_messages', locals: { object: storefront } %>
 
       <div>
         <template hidden data-nested-form-target="template">
           <%= form.simple_fields_for :reasons, Reason.new, child_index: 'NEW_RECORD' do |reason_fields| %>
-            <%= render 'reason', f: reason_fields %>
+            <%= render 'reason_form', f: reason_fields %>
           <% end %>
         </template>
 
@@ -32,25 +22,7 @@
           </button>
 
           <div>
-            <% @reasons.each do |reason| %>
-              <div class="border-t border-gray-200" data-id="<%= reason.id %>">
-                <div class="flex items-center">
-                  <i class="p-4 fa-solid fa-grip-vertical text-lg text-gray-300"></i>
-                  <% if reason.active %>
-                    <i class="py-4 px-3 fa-regular fa-eye text-lg text-blue-600"></i>
-                    <div class="grow">
-                      <%= reason.label %>
-                    </div>
-                  <% else %>
-                    <i class="py-4 px-3 fa-regular fa-eye-slash text-lg text-gray-400"></i>
-                    <div class="grow text-gray-400">
-                      <%= reason.label %>
-                    </div>
-                  <% end %>
-                  <button class="p-4 font-semibold text-blue-600" data-action="click->modal#show" data-modal-id="edit-reason-modal" data-id="<%= reason.id %>">Edit</button>
-                </div>
-              </div>
-            <% end %>
+            <%= render partial: 'reason', collection: @reasons %>
           </div>
         </div>
       </div>

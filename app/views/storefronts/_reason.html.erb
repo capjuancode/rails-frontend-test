@@ -1,29 +1,17 @@
-<div class="nested-form-wrapper">
-  <div class="dashboard-form-fields">
-    <%=
-      f.input :label,
-        label: 'Displayed reason',
-        required: true,
-        placeholder: 'Enter Displayed reason...',
-        hint: "Provide a friendly description for the reason that will be displayed to the customer."
-    %>
-    <%=
-      f.input :code,
-        label: 'Internal return code',
-        required: true,
-        placeholder: 'Enter Internal return code...',
-        hint: "For internal use only. Must be unique. To aid in analytics, we do not recommend changing the code once set."
-    %>
-    <%= f.input :active,
-      label: 'Reason is visible to customers'
-    %>
-    <%= f.input :ordering,
-      label: 'Ordering',
-      placeholder: 'Enter Ordering...',
-      hint: "The order in which the reason will be displayed to the customer. Reasons with lower numbers will be displayed first."
-    %>
-
-    <button type="button" class="btn-danger" data-action="nested-form#removeAssociation">Remove</button>
-    <%= f.hidden_field :_destroy %>
+<div class="border-t border-gray-200" data-id="<%= reason.id %>">
+  <div class="flex items-center">
+    <i class="p-4 fa-solid fa-grip-vertical text-lg text-gray-300"></i>
+    <% if reason.active %>
+      <i class="py-4 px-3 fa-regular fa-eye text-lg text-blue-600"></i>
+      <div class="grow">
+        <%= reason.label %>
+      </div>
+    <% else %>
+      <i class="py-4 px-3 fa-regular fa-eye-slash text-lg text-gray-400"></i>
+      <div class="grow text-gray-400">
+        <%= reason.label %>
+      </div>
+    <% end %>
+    <button class="p-4 font-semibold text-blue-600" data-action="click->modal#show" data-modal-id="edit-reason-modal" data-id="<%= reason.id %>">Edit</button>
   </div>
 </div>
