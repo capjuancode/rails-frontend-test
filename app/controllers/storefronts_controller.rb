@@ -7,8 +7,7 @@ class StorefrontsController < ApplicationController
   end
 
   # GET /storefronts/1 or /storefronts/1.json
-  def show
-  end
+  def show; end
 
   # GET /storefronts/new
   def new
@@ -16,9 +15,7 @@ class StorefrontsController < ApplicationController
   end
 
   # GET /storefronts/1/edit
-  def edit
-    @reasons = @storefront.reasons
-  end
+  def edit; end
 
   # POST /storefronts or /storefronts.json
   def create
@@ -61,7 +58,7 @@ class StorefrontsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_storefront
-      @storefront = Storefront.find(params[:id])
+      @storefront = Storefront.includes(:reasons).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
