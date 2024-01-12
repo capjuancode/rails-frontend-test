@@ -1,4 +1,4 @@
-<div class="border-t border-gray-200" data-id="<%= reason.id %>">
+<div class="border-t border-gray-200 draggable reason" data-id="<%= reason.id %>">
   <div class="flex items-center">
     <i class="p-4 fa-solid fa-grip-vertical text-lg text-gray-300"></i>
     <% if reason.active %>
@@ -12,6 +12,6 @@
         <%= reason.label %>
       </div>
     <% end %>
-    <button class="p-4 font-semibold text-blue-600" data-action="click->modal#show" data-modal-id="edit-reason-modal" data-id="<%= reason.id %>">Edit</button>
+    <button class="edit-action p-4 font-semibold text-blue-600" data-action="click->modal#show" data-modal-id="<%= dom_id(reason) %>">Edit</button>
   </div>
 </div>

@@ -23,15 +23,16 @@
             </div>
           </div>
         </div>
-        
+
+        <%# Reason list %>
         <div class="bg-gray-50 rounded-xl border border-gray-200">
           <button type="button" data-action="nested-form#addAssociation" class="w-full p-3 flex text-blue-600">
             <i class="fa-solid fa-circle-plus text-lg"></i>
             <span class="ml-6 font-semibold">Add Return Reason</span>
           </button>
 
-          <div>
-            <%= render partial: 'reason', collection: @reasons %>
+          <div data-controller="draggable">
+            <%= render partial: 'reasons/reason', collection: storefront.reasons %>
           </div>
         </div>
       </div>

@@ -10,3 +10,4 @@ pin "@fortawesome/fontawesome-svg-core", to: "https://ga.jspm.io/npm:@fortawesom
 pin "@fortawesome/free-brands-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-brands-svg-icons@6.5.1/index.mjs"
 pin "@fortawesome/free-regular-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-regular-svg-icons@6.5.1/index.mjs"
 pin "@fortawesome/free-solid-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-solid-svg-icons@6.5.1/index.mjs"
+pin "@shopify/draggable", to: "https://ga.jspm.io/npm:@shopify/draggable@1.1.3/build/esm/index.mjs"
