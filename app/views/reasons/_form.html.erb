@@ -1,0 +1,53 @@
+
+<div hidden class="nested-form-wrapper" id="<%= dom_id(reason) %>" >
+  <div class="pb-4 border-b border-gray-200 flex justify-between">
+    <legend class="font-bold text-xl"><%= reason.persisted? ? 'Edit' : 'New' %> Return Reason</legend>
+    <button class="" data-action="click->modal#hide">
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+  </div>
+
+  <%= form.simple_fields_for :reasons, reason do |f| %>
+    <div class="dashboard-form-fields">
+      <%=
+        f.input :label,
+          label: 'Displayed reason',
+          required: true,
+          placeholder: 'Enter Displayed reason...',
+          hint: "Provide a friendly description for the reason that will be displayed to the customer.",
+          wrapper_html: { class: "my-4" },
+          hint_html: { class: "text-xs" } #added this to trigger the tails wind to compile this classes
+      %>
+      <%=
+        f.input :code,
+          label: 'Internal return code',
+          required: true,
+          placeholder: 'Enter Internal return code...',
+          hint: "For internal use only. Must be unique. To aid in analytics, we do not recommend changing the code once set."
+      %>
+
+      <div class="flex">
+        <%= f.label :active, class: 'pr-2', data: { action: 'click->nested-form#checkStateIconEye' } do %>
+          <i class="pt-1 pb-4 px-2 fa-regular text-lg fa-eye text-blue-600 <%= reason.active? ? '' : 'hidden' %>"></i>
+          <i class="pt-1 pb-4 px-2 fa-regular text-lg fa-eye-slash text-gray-600 <%= reason.active? ? 'hidden' : '' %>"></i>
+          <%= f.input :active, :label => false, as: :boolean, input_html: { class: 'hidden' } %>
+        <% end %>
+        <div class="grow">
+          <strong>Return Reason is visible</strong>
+          <p class="text-xs">
+            When hidden, this return reason is not offered as an option to the customers. Click on the eye icon to make the return reason visible.
+          </p>
+        </div>
+      </div>
+
+
+      <%= f.hidden_field :ordering, class: 'ordering-number' %>
+      <%= f.hidden_field :_destroy %>
+
+      <div class="flex justify-between">
+        <button type="button" class="btn-danger" data-action="nested-form#removeAssociation">Remove</button>
+        <button class="btn-primary" data-action="click->modal#hide">Continue</button>
+      </div>
+    </div>
+  <% end %>
+</div>

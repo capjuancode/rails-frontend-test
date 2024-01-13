@@ -4,6 +4,17 @@ export default class extends Controller {
   static targets = ["addItem", "template"]
   static values = { index: String }
 
+  checkStateIconEye(e){
+    Array.from(e.currentTarget.closest('label').querySelectorAll('svg')).map(svg => svg.classList.add('hidden'))
+    const state = e.currentTarget.closest('label').querySelector("input[type = 'checkbox']").checked == true;
+
+    if (state){
+      e.currentTarget.closest('label').querySelector('svg.fa-eye-slash').classList.remove('hidden')
+    } else {
+      e.currentTarget.closest('label').querySelector('svg.fa-eye').classList.remove('hidden')
+    }
+  }
+
   addAssociation(event) {
     console.log('addAssociation')
     event.preventDefault()
