@@ -9,7 +9,7 @@ export default class extends Controller {
   connect() {
     const sortable = new Sortable(this.element, {
       draggable: '.draggable',
-      delay: 100,
+      delay: 150,
       mirror: {
         xAxis: false,
         constrainDimensions: true
