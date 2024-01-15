@@ -16,7 +16,7 @@ export default class extends Controller {
     Array.from(element.querySelectorAll('i')).map(svg => svg.style.display = "none")
     const state = element.querySelector("input[type = 'checkbox']").checked
     element.querySelector("input[type = 'checkbox']").checked = !(true);
-\
+
     if (!state){
       element.querySelector('i.fa-eye').style.display = "inline"
       element.querySelector("input[type = 'checkbox']").checked = true;
@@ -48,15 +48,18 @@ export default class extends Controller {
       this.checkBundle(event)
     }
   }
+
   getInputClass(isBundleItem, isRemoveBundle) {
     return isBundleItem ? '.bundle-destroy' : isRemoveBundle ? '.order-destroy' : ''
   }
+
   destroyInput(item, orderClass) {
     const destroyInput = item.querySelector(`input${orderClass}[name*='_destroy']`);
     destroyInput.value = 1;
     this.clearRequired(item);
     item.style.display = 'none';
   }
+
   clearRequired(item) {
     item.querySelectorAll("input[required]").forEach((node) => {
       node.required = false
