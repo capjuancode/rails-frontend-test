@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :storefronts
+  resources :storefronts do
+    resources :reasons, only: [:new] do
+      get :add_form_reason, on: :collection
+      get :form_reason
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

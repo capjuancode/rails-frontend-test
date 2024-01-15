@@ -15,10 +15,8 @@
           <div class="fixed top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <div class="p-4 relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
-                data-modal-target="modalContent"
-              >
-                <%= render partial: 'reasons/form', collection: storefront.reasons, as: 'reason', locals: { form: form } %>
-                <%= render partial: 'reasons/form', locals: { form: form, reason: Reason.new } %>
+                   data-modal-target="modalContent" >
+                <%= turbo_frame_tag 'storefront_reasons' %>
               </div>
             </div>
           </div>
@@ -26,13 +24,16 @@
 
         <%# Reason list %>
         <div class="bg-gray-50 rounded-xl border border-gray-200">
-          <button type="button" data-action="nested-form#addAssociation" class="w-full p-3 flex text-blue-600">
+          <%= link_to add_form_reason_storefront_reasons_path(storefront), class: 'w-full p-3 flex text-blue-600',
+                                                                      data: { turbo_frame: 'storefront_reasons',
+                                                                      turbo_stream: "true",
+                                                                      modal_id: 'new_reason'  }  do %>
             <i class="fa-solid fa-circle-plus text-lg"></i>
             <span class="ml-6 font-semibold">Add Return Reason</span>
-          </button>
+          <% end %>
 
           <div data-controller="draggable">
-            <%= render partial: 'reasons/reason', collection: storefront.reasons %>
+            <%= render partial: 'reasons/reason', collection: storefront.reasons, locals: { storefront: storefront } %>
           </div>
         </div>
       </div>
@@ -44,6 +45,6 @@
     <div class="grow">
       Remember to save your changes before leaving this page
     </div>
-    <%= form.submit 'Save', class: 'btn-primary' %>
+    <%= form.submit 'Save', class: 'btn-primary', data: { action:"click->nested-form#juan" } %>
   </div>
 <% end %>

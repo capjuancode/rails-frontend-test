@@ -1,13 +1,13 @@
 
-<div hidden class="nested-form-wrapper" id="<%= dom_id(reason) %>" >
-  <div class="pb-4 border-b border-gray-200 flex justify-between">
-    <legend class="font-bold text-xl"><%= reason.persisted? ? 'Edit' : 'New' %> Return Reason</legend>
-    <button class="" data-action="click->modal#hide">
-      <i class="fa-solid fa-xmark text-lg"></i>
-    </button>
-  </div>
 
-  <%= form.simple_fields_for :reasons, reason do |f| %>
+<% form.simple_fields_for :reasons, reason, child_index: (reason.id || Time.now.to_i) do |f| %>
+  <div hidden class="nested-form-wrapper" id="<%= dom_id(reason)%>" data-modal-target="nestedForm" >
+    <div class="pb-4 border-b border-gray-200 flex justify-between">
+      <legend class="font-bold text-xl"><%= reason.persisted? ? 'Edit' : 'New' %> Return Reason</legend>
+      <button class="" data-action="click->modal#hide">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
     <div class="dashboard-form-fields">
       <%=
         f.input :label,
@@ -42,6 +42,7 @@
 
 
       <%= f.hidden_field :ordering, class: 'ordering-number' %>
+      <%= f.hidden_field :id, class: 'id' %>
       <%= f.hidden_field :_destroy %>
 
       <div class="flex justify-between">
@@ -49,5 +50,5 @@
         <button class="btn-primary" data-action="click->modal#hide">Continue</button>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

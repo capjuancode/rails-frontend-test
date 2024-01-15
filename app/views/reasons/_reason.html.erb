@@ -12,6 +12,9 @@
         <%= reason.label %>
       </div>
     <% end %>
-    <button class="edit-action p-4 font-semibold text-blue-600" data-action="click->modal#show" data-modal-id="<%= dom_id(reason) %>">Edit</button>
+    <%= link_to 'edit', storefront_reason_form_reason_path(storefront, reason), class: 'edit-action p-4 font-semibold text-blue-600',
+                                                            data: { turbo_frame: 'storefront_reasons',
+                                                                    turbo_stream: "true",
+                                                                    modal_id: dom_id(reason)  } %>
   </div>
 </div>
