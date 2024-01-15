@@ -4,14 +4,25 @@ export default class extends Controller {
   static targets = ["addItem", "template"]
   static values = { index: String }
 
-  checkStateIconEye(e){
-    Array.from(e.currentTarget.closest('label').querySelectorAll('svg')).map(svg => svg.classList.add('hidden'))
-    const state = e.currentTarget.closest('label').querySelector("input[type = 'checkbox']").checked == true;
+  connect() {
+    const element = document.querySelector('.js-eye-checkbox')
+  }
 
-    if (state){
-      e.currentTarget.closest('label').querySelector('svg.fa-eye-slash').classList.remove('hidden')
+  checkStateIconEyeClick(e){
+    this.checkStateIconEye(e.currentTarget)
+  }
+
+  checkStateIconEye(element){
+    Array.from(element.querySelectorAll('i')).map(svg => svg.style.display = "none")
+    const state = element.querySelector("input[type = 'checkbox']").checked
+    element.querySelector("input[type = 'checkbox']").checked = !(true);
+\
+    if (!state){
+      element.querySelector('i.fa-eye').style.display = "inline"
+      element.querySelector("input[type = 'checkbox']").checked = true;
     } else {
-      e.currentTarget.closest('label').querySelector('svg.fa-eye').classList.remove('hidden')
+      element.querySelector('i.fa-eye-slash').style.display = "inline"
+      element.querySelector("input[type = 'checkbox']").checked = false;
     }
   }
 

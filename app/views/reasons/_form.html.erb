@@ -26,10 +26,10 @@
           hint: "For internal use only. Must be unique. To aid in analytics, we do not recommend changing the code once set."
       %>
 
-      <div class="flex">
-        <%= f.label :active, class: 'pr-2', data: { action: 'click->nested-form#checkStateIconEye' } do %>
-          <i class="pt-1 pb-4 px-2 fa-regular text-lg fa-eye text-blue-600 <%= reason.active? ? '' : 'hidden' %>"></i>
-          <i class="pt-1 pb-4 px-2 fa-regular text-lg fa-eye-slash text-gray-600 <%= reason.active? ? 'hidden' : '' %>"></i>
+      <div class="flex mb-3">
+        <div class="js-eye-checkbox" data-action="click->nested-form#checkStateIconEyeClick">
+          <%= icon('fa-regular', 'eye', class: "pt-1 pb-4 px-2 text-lg text-blue-600", style: "display: #{reason.active? ? 'inline' : 'none'}")%>
+          <%= icon('fa-regular', 'eye-slash', class: "pt-1 pb-4 px-2 text-lg text-gray-600", style: "display: #{reason.active? ? 'none' : 'inline'}")%>
           <%= f.input :active, :label => false, as: :boolean, input_html: { class: 'hidden' } %>
         <% end %>
         <div class="grow">
