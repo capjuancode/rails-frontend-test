@@ -1,7 +1,7 @@
 
 
 <% form.simple_fields_for :reasons, reason, child_index: (reason.id || Time.now.to_i) do |f| %>
-  <div hidden class="nested-form-wrapper" id="<%= dom_id(reason)%>" data-modal-target="nestedForm" >
+  <div hidden class="nested-form-wrapper" id="<%= dom_id(reason)%>" data-modal-target="nestedForm" data-controller="nested-form" >
     <div class="pb-4 border-b border-gray-200 flex justify-between">
       <legend class="font-bold text-xl"><%= reason.persisted? ? 'Edit' : 'New' %> Return Reason</legend>
       <button class="" data-action="click->modal#hide">
@@ -31,7 +31,7 @@
           <%= icon('fa-regular', 'eye', class: "pt-1 pb-4 px-2 text-lg text-blue-600", style: "display: #{reason.active? ? 'inline' : 'none'}")%>
           <%= icon('fa-regular', 'eye-slash', class: "pt-1 pb-4 px-2 text-lg text-gray-600", style: "display: #{reason.active? ? 'none' : 'inline'}")%>
           <%= f.input :active, :label => false, as: :boolean, input_html: { class: 'hidden' } %>
-        <% end %>
+        </div>
         <div class="grow">
           <strong>Return Reason is visible</strong>
           <p class="text-xs">

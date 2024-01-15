@@ -1,4 +1,4 @@
-<%= simple_form_for storefront, data: { controller: 'nested-form', nested_form_index_value: 'NEW_RECORD' } do |form| %>
+<%= simple_form_for storefront, data: { nested_form_index_value: 'NEW_RECORD' } do |form| %>
   <fieldset class="m-5 flex bg-white border border-gray-200 rounded-xl shadow">
     <div class="w-2/5 m-4">
       <legend class="font-bold text-xl">Return Reasons</legend>
@@ -45,6 +45,6 @@
     <div class="grow">
       Remember to save your changes before leaving this page
     </div>
-    <%= form.submit 'Save', class: 'btn-primary', data: { action:"click->nested-form#juan" } %>
+    <%= form.submit 'Save', class: 'btn-primary' %>
   </div>
 <% end %>
